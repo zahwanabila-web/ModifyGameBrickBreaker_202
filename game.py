@@ -190,4 +190,36 @@ def gameOver():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     return True
+# Game Manager
+def main():
+    running = True
+    lives = 3
+    score = 0
 
+    scoreText = font.render("score", True, WHITE)
+    scoreTextRect = scoreText.get_rect()
+    scoreTextRect.center = (20, HEIGHT-10)
+
+    livesText = font.render("Lives", True, WHITE)
+    livesTextRect = livesText.get_rect()
+    livesTextRect.center = (120, HEIGHT-10)
+
+    striker = Striker(0, HEIGHT-50, 100, 20, 10, WHITE)
+    strikerXFac = 0
+
+    ball = Ball(0, HEIGHT-150, 7, 5, WHITE)
+
+    blockWidth, blockHeight = 40, 15
+    horizontalGap, verticalGap = 20, 20
+
+    listOfBlocks = populateBlocks(
+        blockWidth, blockHeight, horizontalGap, verticalGap)
+
+    # Game loop
+    while running:
+        screen.fill(BLACK)
+        screen.blit(scoreText, scoreTextRect)
+        screen.blit(livesText, livesTextRect)
+
+        scoreText = font.render("Score : " + str(score), True, WHITE)
+        livesText = font.render("Lives : " + str(lives), True, WHITE)
